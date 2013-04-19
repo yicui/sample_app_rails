@@ -1,4 +1,12 @@
 SampleAppRails::Application.routes.draw do
+  resources :lecturenotes
+
+  resources :assignments
+
+  resources :courses
+
+  resources :teachers
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

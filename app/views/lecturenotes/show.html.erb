@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @lecturenote.title %>
+</p>
+
+<p>
+  <b>Content:</b>
+  <%= @lecturenote.content %>
+</p>
+
+<p>
+  <b>Course:</b>
+  <%= @lecturenote.course_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_lecturenote_path(@lecturenote) %> |
+<%= link_to 'Back', lecturenotes_path %>

@@ -1,0 +1,27 @@
+<h1>Listing lecturenotes</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Content</th>
+    <th>Course</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @lecturenotes.each do |lecturenote| %>
+  <tr>
+    <td><%= lecturenote.title %></td>
+    <td><%= lecturenote.content %></td>
+    <td><%= lecturenote.course_id %></td>
+    <td><%= link_to 'Show', lecturenote %></td>
+    <td><%= link_to 'Edit', edit_lecturenote_path(lecturenote) %></td>
+    <td><%= link_to 'Destroy', lecturenote, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Lecturenote', new_lecturenote_path %>
