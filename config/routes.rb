@@ -1,4 +1,6 @@
 SampleAppRails::Application.routes.draw do
+  root to: 'courses#index' 
+
   resources :lecturenotes
 
   resources :assignments
