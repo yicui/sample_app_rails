@@ -1,11 +1,13 @@
-<header> 
-    <div>
+<header class="navbar navbar-fixed-top navbar-inverse">
+  <div class="navbar-inner">	 
+    <div class="container-fluid" id="logo">
       <h1>Course Name Goes Here</h1>
-      <h3>Lecture Information Goes Here</h3> 
-      <nav><ul>
+      <h2>Lecture Information Goes Here</h2> 
+      <nav><ul class="nav pull-right">
         <li><%= link_to "Syllabus", 'courses' %></li>
         <li><%= link_to "Lectures", 'lecturenotes' %></li>
         <li><%= link_to "Assignments", 'assignments' %></li> 
       </ul> </nav> 
     </div>
+  </div>
 </header>
