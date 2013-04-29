@@ -1,4 +1,4 @@
-<%= form_for(@lecturenote) do |f| %>
+<%= form_for([@course, @lecturenote]) do |f| %>
   <% if @lecturenote.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@lecturenote.errors.count, "error") %> prohibited this lecturenote from being saved:</h2>
@@ -18,10 +18,6 @@
   <div class="field">
     <%= f.label :content %><br />
     <%= f.text_field :content %>
-  </div>
-  <div class="field">
-    <%= f.label :course_id %><br />
-    <%= f.number_field :course_id %>
   </div>
   <div class="actions">
     <%= f.submit %>

@@ -1,8 +1,9 @@
 class LecturenotesController < ApplicationController
+  before_filter :get_course
   # GET /lecturenotes
   # GET /lecturenotes.json
   def index
-    @lecturenotes = Lecturenote.all
+    @lecturenotes = @course.lecturenotes
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +14,7 @@ class LecturenotesController < ApplicationController
   # GET /lecturenotes/1
   # GET /lecturenotes/1.json
   def show
-    @lecturenote = Lecturenote.find(params[:id])
+    @lecturenote = @course.lecturenotes.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,7 +25,8 @@ class LecturenotesController < ApplicationController
   # GET /lecturenotes/new
   # GET /lecturenotes/new.json
   def new
-    @lecturenote = Lecturenote.new
+    @course = Course.find(params[:course_id])    
+    @lecturenote = @course.lecturenotes.build
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,17 +36,17 @@ class LecturenotesController < ApplicationController
 
   # GET /lecturenotes/1/edit
   def edit
-    @lecturenote = Lecturenote.find(params[:id])
+    @lecturenote = @course.lecturenotes.find(params[:id])
   end
 
   # POST /lecturenotes
   # POST /lecturenotes.json
   def create
-    @lecturenote = Lecturenote.new(params[:lecturenote])
+    @lecturenote = @course.lecturenotes.build(params[:lecturenote])
 
     respond_to do |format|
       if @lecturenote.save
-        format.html { redirect_to @lecturenote, notice: 'Lecturenote was successfully created.' }
+        format.html { redirect_to course_lecturenotes_url(@course), notice: 'Lecturenote was successfully created.' }
         format.json { render json: @lecturenote, status: :created, location: @lecturenote }
       else
         format.html { render action: "new" }
@@ -56,11 +58,11 @@ class LecturenotesController < ApplicationController
   # PUT /lecturenotes/1
   # PUT /lecturenotes/1.json
   def update
-    @lecturenote = Lecturenote.find(params[:id])
+    @lecturenote = @course.lecturenotes.find(params[:id])
 
     respond_to do |format|
       if @lecturenote.update_attributes(params[:lecturenote])
-        format.html { redirect_to @lecturenote, notice: 'Lecturenote was successfully updated.' }
+        format.html { redirect_to course_lecturenotes_url(@course), notice: 'Lecturenote was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -72,12 +74,17 @@ class LecturenotesController < ApplicationController
   # DELETE /lecturenotes/1
   # DELETE /lecturenotes/1.json
   def destroy
-    @lecturenote = Lecturenote.find(params[:id])
+    @lecturenote = @course.lecturenotes.find(params[:id])
     @lecturenote.destroy
 
     respond_to do |format|
-      format.html { redirect_to lecturenotes_url }
+      format.html { redirect_to course_lecturenotes_url(@course) }
       format.json { head :no_content }
     end
+  end
+
+  private
+  def get_course
+    @course = Course.find(params[:course_id])
   end
 end

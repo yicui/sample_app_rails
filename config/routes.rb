@@ -1,11 +1,11 @@
 SampleAppRails::Application.routes.draw do
   root to: 'courses#index' 
 
-  resources :lecturenotes
-
   resources :assignments
 
-  resources :courses
+  resources :courses do
+    resources :lecturenotes
+  end
 
   resources :teachers
 
