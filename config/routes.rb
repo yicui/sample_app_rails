@@ -4,6 +4,7 @@ SampleAppRails::Application.routes.draw do
   resources :courses do
     resources :lecturenotes
     resources :assignments    
+    resources :teachers, only: [:show]      
   end
 
   resources :teachers

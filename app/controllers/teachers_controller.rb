@@ -13,7 +13,11 @@ class TeachersController < ApplicationController
   # GET /teachers/1
   # GET /teachers/1.json
   def show
-    @teacher = Teacher.find(params[:id])
+    if (params.has_key?(:course_id))
+      @teacher = Course.find(params[:course_id]).teacher
+    else
+      @teacher = Teacher.find(params[:id])
+    end
 
     respond_to do |format|
       format.html # show.html.erb
