@@ -1,7 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>SampleAppRails</title>
+  <% if (@course == nil) %>
+    <title>SampleAppRails</title>
+  <% else %>
+    <title><%= @course.title %></title>
+    <meta name="keywords" content="<%= @course.description %>, <%= params[:controller] %>"/>    
+    <meta name="description" content="<%= params[:controller] %> of <%= @course.title %>"/>    
+  <% end %>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>

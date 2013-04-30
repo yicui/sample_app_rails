@@ -14,7 +14,8 @@ class TeachersController < ApplicationController
   # GET /teachers/1.json
   def show
     if (params.has_key?(:course_id))
-      @teacher = Course.find(params[:course_id]).teacher
+      @course = Course.find(params[:course_id])
+      @teacher = @course.teacher
     else
       @teacher = Teacher.find(params[:id])
     end

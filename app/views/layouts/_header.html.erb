@@ -1,8 +1,13 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
   <div class="navbar-inner">	 
     <div class="container-fluid" id="logo">
-      <h1>Course Name Goes Here</h1>
-      <h2>Lecture Information Goes Here</h2> 
+      <% if (@course == nil) %>
+        <h1>Course Name Goes Here</h1>
+        <h2>Lecturer Information Goes Here</h2>
+      <% else %>      
+        <h1><%= @course.title %></h1>
+        <h2>Email: <%= @course.teacher.email %> Lecturer: <%= @course.teacher.first_name %> <%= @course.teacher.last_name %></h2>
+      <% end %> 
       <nav><ul class="nav pull-right">
         <li><%= link_to "Syllabus", 'courses' %></li>
         <li><%= link_to "Lectures", 'lecturenotes' %></li>
