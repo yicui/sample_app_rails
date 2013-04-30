@@ -17,13 +17,13 @@
     <td><%= assignment.description %></td>
     <td><%= assignment.duedate %></td>
     <td><%= assignment.course_id %></td>
-    <td><%= link_to 'Show', assignment %></td>
-    <td><%= link_to 'Edit', edit_assignment_path(assignment) %></td>
-    <td><%= link_to 'Destroy', assignment, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Show', [@course, assignment] %></td>
+    <td><%= link_to 'Edit', edit_course_assignment_path(@course, assignment) %></td>
+    <td><%= link_to 'Destroy', [@course, assignment], confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Assignment', new_assignment_path %>
+<%= link_to 'New Assignment', new_course_assignment_path %>

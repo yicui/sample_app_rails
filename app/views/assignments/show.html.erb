@@ -15,11 +15,5 @@
   <%= @assignment.duedate %>
 </p>
 
-<p>
-  <b>Course:</b>
-  <%= @assignment.course_id %>
-</p>
-
-
-<%= link_to 'Edit', edit_assignment_path(@assignment) %> |
-<%= link_to 'Back', assignments_path %>
+<%= link_to 'Edit', edit_course_assignment_path(@course, @assignment) %> |
+<%= link_to 'Back', course_assignments_path %>
