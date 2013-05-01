@@ -7,12 +7,12 @@
       <% else %>      
         <h1><%= @course.title %></h1>
         <h2>Email: <%= @course.teacher.email %> Lecturer: <%= @course.teacher.first_name %> <%= @course.teacher.last_name %></h2>
-      <% end %> 
-      <nav><ul class="nav pull-right">
-        <li><%= link_to "Syllabus", 'courses' %></li>
-        <li><%= link_to "Lectures", 'lecturenotes' %></li>
-        <li><%= link_to "Assignments", 'assignments' %></li> 
-      </ul> </nav> 
+        <nav><ul class="nav pull-right">
+          <li><%= link_to "Syllabus", @course %></li>
+          <li><%= link_to "Lectures", course_lecturenotes_path(@course) %></li>
+          <li><%= link_to "Assignments", course_assignments_path(@course) %></li>
+        </ul> </nav>
+      <% end %>       
     </div>
   </div>
 </header>
