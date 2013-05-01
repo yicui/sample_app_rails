@@ -5,7 +5,7 @@
         <h1>Course Name Goes Here</h1>
         <h2>Lecturer Information Goes Here</h2>
       <% else %>      
-        <h1><%= @course.title %></h1>
+        <h1><%= @course.number %>: <%= @course.title %></h1>
         <h2>Email: <%= @course.teacher.email %> Lecturer: <%= @course.teacher.first_name %> <%= @course.teacher.last_name %></h2>
         <nav><ul class="nav pull-right">
           <li><%= link_to "Syllabus", @course %></li>

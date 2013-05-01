@@ -5,7 +5,6 @@
     <th>Title</th>
     <th>Description</th>
     <th>Duedate</th>
-    <th>Course</th>
     <th></th>
     <th></th>
     <th></th>
@@ -16,7 +15,6 @@
     <td><%= assignment.title %></td>
     <td><%= assignment.description %></td>
     <td><%= assignment.duedate %></td>
-    <td><%= assignment.course_id %></td>
     <td><%= link_to 'Show', [@course, assignment] %></td>
     <td><%= link_to 'Edit', edit_course_assignment_path(@course, assignment) %></td>
     <td><%= link_to 'Destroy', [@course, assignment], confirm: 'Are you sure?', method: :delete %></td>

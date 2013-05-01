@@ -4,7 +4,6 @@
   <tr>
     <th>Title</th>
     <th>Content</th>
-    <th>Course</th>
     <th></th>
     <th></th>
     <th></th>
@@ -14,7 +13,6 @@
   <tr>
     <td><%= lecturenote.title %></td>
     <td><%= lecturenote.content %></td>
-    <td><%= lecturenote.course_id %></td>
     <td><%= link_to 'Show', [@course, lecturenote] %></td>
     <td><%= link_to 'Edit', edit_course_lecturenote_path(@course, lecturenote) %></td>
     <td><%= link_to 'Destroy', [@course, lecturenote], confirm: 'Are you sure?', method: :delete %></td>
