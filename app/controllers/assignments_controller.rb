@@ -3,7 +3,7 @@ class AssignmentsController < ApplicationController
   # GET /assignments
   # GET /assignments.json
   def index
-    @assignments = @course.assignments
+    @assignments = @course.assignments.paginate(page: params[:page], per_page: 6)
 
     respond_to do |format|
       format.html # index.html.erb

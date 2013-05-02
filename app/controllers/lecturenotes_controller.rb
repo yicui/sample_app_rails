@@ -3,7 +3,7 @@ class LecturenotesController < ApplicationController
   # GET /lecturenotes
   # GET /lecturenotes.json
   def index
-    @lecturenotes = @course.lecturenotes
+    @lecturenotes = @course.lecturenotes.paginate(page: params[:page], per_page: 6)
 
     respond_to do |format|
       format.html # index.html.erb
