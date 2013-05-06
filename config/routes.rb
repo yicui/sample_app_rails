@@ -1,4 +1,6 @@
 SampleAppRails::Application.routes.draw do
+  resources :students
+
   root to: 'courses#index' 
 
   resources :courses do

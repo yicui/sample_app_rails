@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @student.first_name %> <%= @student.last_name.upcase %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%= @student.email %>
+</p>
+
+
+<%= link_to 'Edit', edit_student_path(@student) %> |
+<%= link_to 'Back', students_path %>
