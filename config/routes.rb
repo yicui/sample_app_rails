@@ -1,4 +1,10 @@
 SampleAppRails::Application.routes.draw do
+  get "sessions/new"
+
+  get "sessions/create"
+
+  get "sessions/destroy"
+
   root to: 'courses#index' 
 
   resources :admins
@@ -21,6 +27,10 @@ SampleAppRails::Application.routes.draw do
   end
 
   resources :teachers
+
+  resources :sessions, only: [:new, :create, :destroy]
+  match '/signin', to: 'sessions#new'
+  match '/signout', to: 'sessions#destroy', via: :delete
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
