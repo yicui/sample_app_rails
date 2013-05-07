@@ -80,4 +80,47 @@ class StudentsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  # GET /students/1/courses
+  # GET /students/1/courses.json  
+  def courses
+    @student = Student.find(params[:id])
+    @courses = @student.courses
+    
+    respond_to do |format|
+      format.html # courses.html.erb
+      format.json { render json: @student.courses }
+    end    
+  end
+
+  # POST /students/1/course_add?course_id=1
+  def course_add
+    #Convert ids from routing to objects
+    @student = Student.find(params[:id])
+    @course = Course.find(params[:course])
+    if not @student.courses.include?(@course)      
+      @student.courses << @course
+      flash[:notice] = 'Student was successfully enrolled'
+    else
+      flash[:error] = 'Student was already enrolled'
+    end
+    redirect_to courses_student_url(@student)
+  end
+  
+  # POST /students/1/course_remove?courses[]=
+  def course_remove
+    @student = Student.find(params[:id])
+    course_ids = params[:courses]
+    unless course_ids.blank?
+      course_ids.each do |course_id|
+        course = Course.find(course_id)
+        if @student.courses.include?(course)
+          logger.info "Removing student from course #{course.id}"
+          @student.courses.delete(course)
+          flash[:notice] = 'Course was successfully deleted'
+        end
+      end
+    end
+    redirect_to courses_student_url(@student)
+  end
 end

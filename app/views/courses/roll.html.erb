@@ -1,0 +1,18 @@
+<h1>Roll for <%= @course.title %></h1>
+
+<% if @course.students.count > 0 %>
+  <table>
+    <tr>
+      <th>Student</th>
+    </tr>
+    <% for student in @course.students do %>
+      <tr>
+        <td><%=link_to [student.first_name, student.last_name.upcase].join(" "), student %></td>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  <p>No students are enrolled.</p>
+<% end %>
+
+<p><%= link_to "Back", @course %></p>

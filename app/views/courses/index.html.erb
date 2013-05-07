@@ -2,10 +2,15 @@
 
 <table>
   <tr>
+    <th>Number</th>
     <th>Title</th>
     <th>Description</th>
     <th>Syllabus</th>
     <th>Teacher</th>
+    <th>Enrolled</th>    
+    <th></th>
+    <th></th>
+    <th></th>
     <th></th>
     <th></th>
     <th></th>
@@ -17,7 +22,8 @@
     <td><%= course.title %></td>
     <td><%= course.description %></td>
     <td><%= course.syllabus %></td>
-    <td><%= course.teacher_id %></td>
+    <td><%= course.teacher.first_name %> <%= course.teacher.last_name.upcase %></td>
+    <td><%= course.students.count %></td>
     <td><%= link_to 'Show', course %></td>
     <td><%= link_to 'Edit', edit_course_path(course) %></td>
     <td><%= link_to 'Destroy', course, confirm: 'Are you sure?', method: :delete %></td>

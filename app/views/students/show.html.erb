@@ -10,6 +10,15 @@
   <%= @student.email %>
 </p>
 
+<p>
+  <b>Courses:</b>
+  <% if @student.courses.empty? %>
+    Not enrolled on any courses yet.
+  <% else %>
+    <%= @student.courses.collect {|c| link_to(c.title, c)}.join(", ").html_safe%>
+  <% end %>
+</p>
 
 <%= link_to 'Edit', edit_student_path(@student) %> |
+<%= link_to 'Courses', courses_student_path(@student) %> |
 <%= link_to 'Back', students_path %>

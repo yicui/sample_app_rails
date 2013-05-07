@@ -32,6 +32,13 @@ ActiveRecord::Schema.define(:version => 20130505055459) do
     t.string   "number"
   end
 
+  create_table "courses_students", :id => false, :force => true do |t|
+    t.integer "course_id",  :null => false
+    t.integer "student_id", :null => false
+  end
+
+  add_index "courses_students", ["course_id", "student_id"], :name => "index_courses_students_on_course_id_and_student_id", :unique => true
+
   create_table "lecturenotes", :force => true do |t|
     t.string   "title"
     t.string   "content"

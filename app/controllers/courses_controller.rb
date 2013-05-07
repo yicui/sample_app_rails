@@ -80,4 +80,14 @@ class CoursesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  # GET /courses/1/roll
+  # GET /courses/1/roll.json  
+  def roll
+    @course = Course.find(params[:id])
+    respond_to do |format|
+      format.html # roll.html.erb
+      format.json { render json: @course.students }
+    end    
+  end
 end

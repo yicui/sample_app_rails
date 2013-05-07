@@ -1,4 +1,5 @@
 class Student < ActiveRecord::Base
+  has_and_belongs_to_many :courses
   before_save { |student| student.email = email.downcase } 
   validates_presence_of :first_name, :last_name
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/

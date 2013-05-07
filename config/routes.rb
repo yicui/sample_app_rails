@@ -1,12 +1,21 @@
 SampleAppRails::Application.routes.draw do
-  resources :students
-
   root to: 'courses#index' 
+
+  resources :students do
+    member do
+      get :courses
+      post :course_add
+      post :course_remove
+   end
+  end
 
   resources :courses do
     resources :lecturenotes
     resources :assignments    
     resources :teachers, only: [:show]      
+    member do
+      get :roll
+    end
   end
 
   resources :teachers

@@ -11,6 +11,7 @@
           <li><%= link_to "Syllabus", @course %></li>
           <li><%= link_to "Lectures", course_lecturenotes_path(@course) %></li>
           <li><%= link_to "Assignments", course_assignments_path(@course) %></li>
+          <li><%= link_to "Students", roll_course_path(@course) %></li>          
         </ul> </nav>
       <% end %>       
     </div>
