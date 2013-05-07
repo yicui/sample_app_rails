@@ -1,6 +1,8 @@
 SampleAppRails::Application.routes.draw do
   root to: 'courses#index' 
 
+  resources :admins
+
   resources :students do
     member do
       get :courses
