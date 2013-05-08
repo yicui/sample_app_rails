@@ -1,19 +1,39 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
   <div class="navbar-inner">	 
     <div class="container-fluid" id="logo">
-      <% if (@course == nil) %>
-        <h1>Course Name Goes Here</h1>
-        <h2>Lecturer Information Goes Here</h2>
-      <% else %>      
-        <h1><%= @course.number %>: <%= @course.title %></h1>
-        <h2>Email: <%= @course.teacher.email %> Lecturer: <%= @course.teacher.first_name %> <%= @course.teacher.last_name %></h2>
-        <nav><ul class="nav pull-right">
-          <li><%= link_to "Syllabus", @course %></li>
-          <li><%= link_to "Lectures", course_lecturenotes_path(@course) %></li>
-          <li><%= link_to "Assignments", course_assignments_path(@course) %></li>
-          <li><%= link_to "Students", roll_course_path(@course) %></li>          
-        </ul> </nav>
-      <% end %>       
+      <% if !signed_in? %>
+        <h1>Please sign in first</h1>
+      <% elsif @course == nil %>
+        <h1>Please select a course</h1>
+      <% else %>
+        <h1><%= @course.number %>: <%= @course.title %></h1> 
+        <h2>Email: <%= @course.teacher.email %> Lecturer: <%= @course.teacher.first_name %> <%= @course.teacher.last_name %></h2> 
+      <% end %>
+
+      <nav><ul class="nav pull-right">
+        <li><%= link_to "Courses", courses_path %></li>
+        <% if @course %>
+          <li><%= link_to "Syllabus", @course %></li>      
+          <% if signed_in? %>
+            <li><%= link_to "Lectures", course_lecturenotes_path(@course) %></li>
+            <li><%= link_to "Assignments", course_assignments_path(@course) %></li>
+            <% if current_user.class.name != "Student" %>
+              <li><%= link_to "Students", roll_course_path(@course) %></li>
+            <% end %>
+          <% end %>
+        <% elsif current_user.class.name == "Admin" %>
+          <li><%= link_to "Teachers", teachers_path(@course) %></li>
+          <li><%= link_to "Students", students_path(@course) %></li>
+        <% end %>
+
+        <% if !signed_in? %>
+          <li><%= link_to "Sign In", signin_path %></li>
+          <li><%= link_to "Sign Up", new_student_path %></li>
+        <% else %>
+          <li><%= link_to "Your #{current_user.class.name} Profile", current_user %></li>
+          <li><%= link_to "Sign Out", signout_path, method: "delete" %></li>
+        <% end %>
+      </ul></nav>
     </div>
   </div>
 </header>

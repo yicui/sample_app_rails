@@ -12,4 +12,19 @@ module SessionsHelper
   def current_user=(user)
     @current_user = user
   end
+
+  def current_user
+    user = Student.find_by_remember_token(cookies[:remember_token])
+    if !user
+      user = Teacher.find_by_remember_token(cookies[:remember_token])
+      if !user
+        user = Admin.find_by_remember_token(cookies[:remember_token])
+      end
+    end
+    @current_user ||= user
+  end
+
+  def signed_in?
+    !current_user.nil?
+  end
 end

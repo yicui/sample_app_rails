@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <% if (@course == nil) %>
-    <title>SampleAppRails</title>
+  <% if !signed_in? %>
+    <title>Sign in</title>
+  <% elsif @course == nil %>
+    <title>Select a course</title>
   <% else %>
     <title><%= @course.title %></title>
     <meta name="keywords" content="<%= @course.description %>, <%= params[:controller] %>"/>    
