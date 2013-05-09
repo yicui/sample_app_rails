@@ -14,8 +14,12 @@
     <td><%= lecturenote.title %></td>
     <td><%= lecturenote.content %></td>
     <td><%= link_to 'Show', [@course, lecturenote] %></td>
+    <% if current_user.class.name == "Teacher" %>
     <td><%= link_to 'Edit', edit_course_lecturenote_path(@course, lecturenote) %></td>
     <td><%= link_to 'Destroy', [@course, lecturenote], confirm: 'Are you sure?', method: :delete %></td>
+    <% else %>
+      <td></td><td></td>
+    <% end %>
   </tr>
 <% end %>
 </table>
@@ -23,4 +27,6 @@
 <br />
 <%= will_paginate %> 
 
+<% if current_user.class.name == "Teacher" %>
 <%= link_to 'New Lecturenote', new_course_lecturenote_path %>
+<% end %>

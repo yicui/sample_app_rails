@@ -16,8 +16,12 @@
     <td><%= assignment.description %></td>
     <td><%= assignment.duedate %></td>
     <td><%= link_to 'Show', [@course, assignment] %></td>
+    <% if current_user.class.name == "Teacher" %>
     <td><%= link_to 'Edit', edit_course_assignment_path(@course, assignment) %></td>
     <td><%= link_to 'Destroy', [@course, assignment], confirm: 'Are you sure?', method: :delete %></td>
+    <% else %>
+      <td></td><td></td>
+    <% end %>
   </tr>
 <% end %>
 </table>
@@ -25,4 +29,6 @@
 <br />
 <%= will_paginate %> 
 
+<% if current_user.class.name == "Teacher" %>
 <%= link_to 'New Assignment', new_course_assignment_path %>
+<% end %>

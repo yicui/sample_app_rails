@@ -5,23 +5,29 @@
   <table>
     <tr>
       <th>Course</th>
+      <% if current_user.class.name == "Student" %>      
       <th>Remove?</th>
+      <% end %>
     </tr>
   <% for course in @courses do %>
     <tr>
       <td><%= course.title %></td>
+      <% if current_user.class.name == "Student" %>
       <td><%= check_box_tag "courses[]", course.id %></td>
+      <% end %>
     </tr>
   <% end %>
   </table>
   <br />
-
+  <% if current_user.class.name == "Student" %>      
   <%= submit_tag 'Remove checked courses' %>
+  <% end %>
   <% end %>
 <% else %>
   <p>Not enrolled in any courses yet.</p>
 <% end %>
 
+<% if current_user.class.name == "Student" %>
 <h2>Enroll in new course</h2>
 <% if @student.courses.count < Course.count %>
   <%= form_tag(course_add_student_path(@student)) do %>
@@ -31,5 +37,5 @@
 <% else %>
   <p><%= @student.first_name %> <%= @student.last_name.upcase %> is enrolled in every course.</p>
 <% end %>
-
+<% end %>
 <p><%=link_to "Back", @student %></p>

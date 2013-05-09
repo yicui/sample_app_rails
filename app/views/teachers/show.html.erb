@@ -30,5 +30,7 @@
 </p>
 
 
+<% if current_user.class.name == "Teacher" %>
 <%= link_to 'Edit', edit_teacher_path(@teacher) %> |
+<% end %>
 <%= link_to 'Back', teachers_path %>

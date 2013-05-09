@@ -15,5 +15,7 @@
   <%= @assignment.duedate %>
 </p>
 
+<% if current_user.class.name == "Teacher" %>
 <%= link_to 'Edit', edit_course_assignment_path(@course, @assignment) %> |
+<% end %>
 <%= link_to 'Back', course_assignments_path %>

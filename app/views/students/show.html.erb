@@ -19,6 +19,8 @@
   <% end %>
 </p>
 
+<% if current_user.class.name == "Student" %>
 <%= link_to 'Edit', edit_student_path(@student) %> |
+<% end %>
 <%= link_to 'Courses', courses_student_path(@student) %> |
 <%= link_to 'Back', students_path %>

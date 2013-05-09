@@ -26,6 +26,10 @@
 </p>
 
 
+<% if current_user.class.name == "Admin" %>
 <%= link_to 'Edit', edit_course_path(@course) %> |
+<% end %>
+<% if ["Admin", "Teacher"].include? current_user.class.name %>
 <%= link_to 'Roll', roll_course_path(@course) %> |
+<% end %>
 <%= link_to 'Back', courses_path %>

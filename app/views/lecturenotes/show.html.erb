@@ -10,5 +10,7 @@
   <%= @lecturenote.content %>
 </p>
 
+<% if current_user.class.name == "Teacher" %>
 <%= link_to 'Edit', edit_course_lecturenote_path(@course, @lecturenote) %> |
+<% end %>
 <%= link_to 'Back', course_lecturenotes_path %>
