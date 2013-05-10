@@ -1,7 +1,7 @@
 <footer class="footer">
-  <% if (@course == nil) %>	
-    <a href="#">About</a> - <a href="/contact">Contact Us</a> - <a href="#">Terms of Use</a>
-  <% else %>
-    <a href="#">About</a> - <%= link_to "Contact Us", [@course, @course.teacher] %> - <a href="#">Terms of Use</a>
+  <% if @course != nil and (current_user.class.name == "Admin" or current_user == @course.teacher or (current_user.class.name == "Student" and (@course.teacher.courses & current_user.courses).present?)) %>	
+    <a href="/#">About</a> - <%= link_to "Contact Us", [@course, @course.teacher] %> - <a href="/#">Terms of Use</a>
+  <% else %> 
+    <a href="/#">About</a> - <a href="/#">Contact Us</a> - <a href="/#">Terms of Use</a>
   <% end %>  
 </footer>

@@ -1,4 +1,7 @@
 class TeachersController < ApplicationController
+  before_filter :admin_user, only: [:index, :new, :create, :destroy]
+  before_filter :self_teacher, only: [:edit, :update]
+  before_filter :those_who_can_see, only: [:show]
   # GET /teachers
   # GET /teachers.json
   def index
@@ -85,4 +88,18 @@ class TeachersController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+    def admin_user
+      redirect_to signin_path, notice: "Only admin can do this" unless current_user.class.name == "Admin"
+    end
+    def self_teacher
+      redirect_to signin_path, notice: "Only the teacher himself/herself can do this" unless current_user == Teacher.find(params[:id])
+    end
+    def those_who_can_see
+      @teacher = Teacher.find(params[:id])
+      unless current_user.class.name == "Admin" or current_user == @teacher or (current_user.class.name == "Student" and (@teacher.courses & current_user.courses).present?) 
+        redirect_to signin_path, notice: "Teacher profile can be only seen by his/her students or admins"
+      end
+    end
 end

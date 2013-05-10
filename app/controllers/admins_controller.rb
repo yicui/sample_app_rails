@@ -1,4 +1,7 @@
 class AdminsController < ApplicationController
+  before_filter :admin_user
+  before_filter :self_admin, only: [:edit, :update]
+  before_filter :other_admin, only: :destroy 
   # GET /admins
   # GET /admins.json
   def index
@@ -80,4 +83,15 @@ class AdminsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  private
+    def admin_user
+      redirect_to signin_path, notice: "Please sign in as an admin" unless current_user.class.name == "Admin"
+    end
+    def self_admin
+      redirect_to admins_path, notice: "You cannot change settings of other admins" unless current_user == Admin.find(params[:id])      
+    end
+    def other_admin
+      redirect_to admins_path, notice: "You cannot destroy your own admin account" unless current_user != Admin.find(params[:id])      
+    end
 end

@@ -1,4 +1,6 @@
 class CoursesController < ApplicationController
+  before_filter :admin_user, only: [:new, :edit, :create, :update, :destroy]
+  before_filter :correct_teacher_or_admin, only: [:roll] 
   # GET /courses
   # GET /courses.json
   def index
@@ -90,4 +92,14 @@ class CoursesController < ApplicationController
       format.json { render json: @course.students }
     end    
   end
+
+  private
+    def admin_user
+      redirect_to root_path, notice: "Only admin can do this" unless current_user.class.name == "Admin"
+    end
+    def correct_teacher_or_admin
+      unless current_user.class.name == "Admin" or current_user == @course.teacher
+        redirect_to root_path, notice: "You are either not part of this course or don't have enough access rights"
+      end
+    end
 end

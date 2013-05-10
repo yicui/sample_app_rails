@@ -1,4 +1,7 @@
 class StudentsController < ApplicationController
+  before_filter :admin_user, only: [:index, :destroy, :courses]
+  before_filter :self_student, only: [:edit, :update, :course_add, :course_remove]
+  before_filter :those_who_can_see, only: [:show]
   # GET /students
   # GET /students.json
   def index
@@ -13,8 +16,6 @@ class StudentsController < ApplicationController
   # GET /students/1
   # GET /students/1.json
   def show
-    @student = Student.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @student }
@@ -123,4 +124,18 @@ class StudentsController < ApplicationController
     end
     redirect_to courses_student_url(@student)
   end
+
+  private
+    def admin_user
+      redirect_to signin_path, notice: "Only admin can do this" unless current_user.class.name == "Admin"
+    end
+    def self_student
+      redirect_to signin_path, notice: "Only the student himself/herself can do this" unless current_user == Student.find(params[:id])
+    end
+    def those_who_can_see
+      @student = Student.find(params[:id])
+      unless current_user.class.name == "Admin" or current_user == @student or (current_user.class.name == "Teacher" and (@student.courses & current_user.courses).present?) 
+        redirect_to signin_path, notice: "Student profile can be only seen by his/her teachers or admins"
+      end
+    end
 end

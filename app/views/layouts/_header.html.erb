@@ -14,7 +14,7 @@
         <li><%= link_to "Courses", courses_path %></li>
         <% if @course %>
           <li><%= link_to "Syllabus", @course %></li>      
-          <% if signed_in? %>
+          <% if current_user.class.name == "Admin" or current_user == @course.teacher or @course.students.include?(current_user) %>
             <li><%= link_to "Lectures", course_lecturenotes_path(@course) %></li>
             <li><%= link_to "Assignments", course_assignments_path(@course) %></li>
             <% if current_user.class.name != "Student" %>
@@ -22,8 +22,8 @@
             <% end %>
           <% end %>
         <% elsif current_user.class.name == "Admin" %>
-          <li><%= link_to "Teachers", teachers_path(@course) %></li>
-          <li><%= link_to "Students", students_path(@course) %></li>
+          <li><%= link_to "Teachers", teachers_path %></li>
+          <li><%= link_to "Students", students_path %></li>
         <% end %>
 
         <% if !signed_in? %>
